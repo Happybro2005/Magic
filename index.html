@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Magic</title>
+  <link rel="stylesheet" href="style.css">
+    <style>
+        body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        color: white;
+        text-align: center;
+        }
+        #bgVideo {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -1;
+        }
+        #container {
+        position: relative;
+        top: 35%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        border-radius: 10px;
+        }
+        input {
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: none;
+        }
+        button {
+        padding: 10px 20px;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;
+        }
+        button:hover {
+        background-color: #218838;
+        }
+  </style>
+</head>
+<body>
+
+  <!-- 🎬 Background Video -->
+  <video autoplay muted loop id="bgVideo">
+    <source src="Untitled Project.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- ✨ Content -->
+  <div id="container">
+    <h1>Magic Number Trick</h1>
+    <div id="step"></div>
+  </div>
+
+  <script>
+    let userName = "";
+    let step = 0;
+
+    function nextStep(inputValue = "") {
+      const stepDiv = document.getElementById("step");
+      if(step === -1){
+        stepDiv.innerHTML = `<p>Hello you are going to do magic trick</p>`;
+        
+      }
+
+      else if(step === 0){
+        stepDiv.innerHTML = `
+          <p>Welcome! Please enter your name:</p>
+          <p>आपका स्वागत है! कृपया अपना नाम दर्ज करें</p>
+          <input id="nameInput" type="text">
+          <button onclick="nextStep(document.getElementById('nameInput').value)">OK</button>
+        `;
+      }
+      else if(step === 1){
+        userName = inputValue;
+        stepDiv.innerHTML = `
+          <p>Hello <b>${userName}</b>! Think of a 4-digit number in your mind.<br>When ready, click OK.</p>
+          <p> नमस्ते <b>${userName}</b>! कृपया अपने मन में 4 अंकों की एक संख्या सोचें  <br>जब आप तैयार हों, तो OK पर क्लिक करें।</p>
+          <button onclick="nextStep()">OK</button>
+        `;
+      }
+      else if(step === 2){
+        stepDiv.innerHTML = `
+          <p>Add the digits of your 4-digit number together.<br>When done, click OK.</p>
+          <p>अपनी 4 अंकों की संख्या के अंकों को एक साथ जोड़ें <br>जब आप तैयार हों, तो OK पर क्लिक करें।</p>
+          <button onclick="nextStep()">OK</button>
+        `;
+      }
+      else if(step === 3){
+        stepDiv.innerHTML = `
+          <p>Now subtract the sum of digits value from your original 4-digit number.<br>When done, click OK.</p>
+          <p>अब अंकों के मान के योग को अपनी मूल 4-अंकीय संख्या से घटाएँ। <br>जब आप तैयार हों, तो OK पर क्लिक करें।</p>
+          <button onclick="nextStep()">OK</button>
+        `;
+      }
+      else if(step === 4){
+        stepDiv.innerHTML = `
+          <p>Now from the result, hide any one digit and enter the remaining digits:<br> After entering the number click on OK button</p>
+          <p>अब परिणाम से किसी एक अंक को छिपाएं और शेष अंक दर्ज करें,<br>अंक दर्ज करने के बाद ओके पर क्लिक करें</p>
+          <input id="digitsInput" type="text" placeholder="Enter remaining digits">
+          <button onclick="nextStep(document.getElementById('digitsInput').value)">Find Number</button>
+        `;
+      }
+      else if(step === 5){
+        let digits = inputValue.split('').map(Number);
+        let digitSum = digits.reduce((a,b) => a+b, 0);
+        let hidden = 9 - (digitSum % 9);
+        if (hidden === 9) hidden = 0;
+
+        stepDiv.innerHTML = `
+          <h2>✨ The Magic Result ✨</h2>
+          <p>${userName}, the number you hid is: <b>${hidden}</b></p>
+          <p>${userName}, आपने जो संख्या छुपाई है वह <b>${hidden}</b> है।</p>
+        `;
+      }
+
+      step++;
+    }
+
+    // Start
+    nextStep();
+  </script>
+</body>
+</html>
