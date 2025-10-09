@@ -11,11 +11,11 @@
         height: 100%;
         overflow: hidden;
         font-family: Arial, sans-serif;
-        color: white;
+        color: rgb(0, 0, 0);
         text-align: center;
         }
         #bgVideo {
-        position: fixed;
+        position: auto;
         right: 0;
         bottom: 0;
         min-width: 100%;
@@ -26,7 +26,7 @@
         position: relative;
         top: 35%;
         transform: translateY(-50%);
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(117, 93, 93, 0.5);
         padding: 20px;
         border-radius: 10px;
         }
@@ -41,8 +41,8 @@
         margin-top: 10px;
         border-radius: 5px;
         border: none;
-        background-color: #28a745;
-        color: white;
+        background-color: #f8db35;
+        color: rgb(0, 0, 0);
         cursor: pointer;
         }
         button:hover {
@@ -121,7 +121,7 @@
 
         stepDiv.innerHTML = `
           <h2>✨ The Magic Result ✨</h2>
-          <p>${userName}, the number you hided is: <b>${hidden}</b></p>
+          <p>${userName}, the number you hid is: <b>${hidden}</b></p>
           <p>${userName}, आपने जो संख्या छुपाई है वह <b>${hidden}</b> है।</p>
         `;
       }
@@ -134,5 +134,7 @@
   </script>
 </body>
 </html>
+
+
 
 
